@@ -43,6 +43,7 @@ while True:
         price = float(input("Please insert PRODUCT PRICE value: "))
     else:
         break
+price = "{:.2f}".format(price)
 # FOREVER LOOP FOR HANDLING Product manufacturing cost INPUT VALIDATION (checks if it isn't a real number greater than 0)
 while True:
     try:
@@ -55,6 +56,7 @@ while True:
         manucost = float(input("Please insert PRODUCT MANUFACTURING COST value: "))
     else:
         break
+manucost = "{:.2f}".format(manucost)
 # FOREVER LOOP FOR HANDLING Stock Level INPUT VALIDATION (checks if it isn't an integer greater than 0)
 while True:
     try:
@@ -79,37 +81,13 @@ while True:
         monthlymanu = int(input("Please insert ESTIMATED MONTHLY UNITS MANUFACTURED value: "))
     else:
         break
-
+# PRINTS ALL INPUTS FOR USER TO SEE
 print("\nProduct code: " + str(code)) 
 print("Product name: " + str(name))
 print("Product price: $" + str(price))
 print("Product manufacturing cost: $" + str(manucost))
 print("Product stock level: " + str(stock))
 print("Estimated monthly units manufactured: " + str(monthlymanu) + "\n")
+# OBJECT NAMED 'product' CREATED
+product = Product(code,name,price,manucost,stock,monthlymanu)
 
-
-
-
-
-
-
-
-
-
-
-'''
-
-
-
-manucost = input("Please insert")
-
-
-stock = input("Please insert")
-
-
-monthlymanu = input("Please insert")
-
-
-
-product=Product(code,name,price,manucost,stock,monthlymanu)
-'''
