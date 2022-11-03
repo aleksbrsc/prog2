@@ -9,14 +9,6 @@ class Product:
     self.stock=stock
     self.monthlymanu=monthlymanu
 
-def sure():
-    global sure
-    sure = input("\nAre you sure? (yes/no)\n\n").lower()
-    while sure != 'yes' and sure != 'no':
-        print("\nInvalid input, try again...")
-        sure = input("Are you sure? (yes/no)\n").lower()
-    print("\nVery well.\n")
-
 # FOREVER LOOP FOR HANDLING Product code INPUT VALIDATION (checks if it isn't an int from 0-9999)
 while True:
     try:
@@ -31,11 +23,11 @@ while True:
         break
 # FOREVER LOOP FOR HANDLING Product name INPUT VALIDATION (checks if the input contains numbers)
 while True:
-    name = str(input("Please insert PRODUCT NAME (string): "))
+    name = str(input("Please insert PRODUCT NAME: "))
     res = any(chr.isdigit() for chr in str(name))
     while res == True: 
-        print("\n\u001b[31mPRODUCT NAME must be a string\u001b[0m\n")
-        name = str(input("Please insert PRODUCT NAME (string): "))
+        print("\n\u001b[31mPRODUCT NAME must be a string without any numbers\u001b[0m\n")
+        name = str(input("Please insert PRODUCT NAME: "))
         res = any(chr.isdigit() for chr in str(name))
     else:
         break
@@ -88,12 +80,14 @@ while True:
     else:
         break
 
-print("\n" + str(code)) 
-print("\n" + str(name))
-print("\n" + str(price))
-print("\n" + str(manucost))
-print("\n" + str(stock))
-print("\n" + str(monthlymanu))
+print("\nProduct code: " + str(code)) 
+print("Product name: " + str(name))
+print("Product price: $" + str(price))
+print("Product manufacturing cost: $" + str(manucost))
+print("Product stock level: " + str(stock))
+print("Estimated monthly units manufactured: " + str(monthlymanu) + "\n")
+
+
 
 
 
