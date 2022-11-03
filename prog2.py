@@ -17,7 +17,7 @@ def sure():
         sure = input("Are you sure? (yes/no)\n").lower()
     print("\nVery well.\n")
 
-# FOREVER LOOP FOR HANDLING Product code INPUT VALIDATION
+# FOREVER LOOP FOR HANDLING Product code INPUT VALIDATION (checks if it isn't an int from 0-9999)
 while True:
     try:
         code = int(input("Please insert PRODUCT CODE value (0-9999): "))
@@ -29,7 +29,7 @@ while True:
         code = int(input("Please insert PRODUCT CODE value (0-9999): "))
     else:
         break
-# FOREVER LOOP FOR HANDLING Product name INPUT VALIDATION
+# FOREVER LOOP FOR HANDLING Product name INPUT VALIDATION (checks if the input contains numbers)
 while True:
     name = str(input("Please insert PRODUCT NAME (string): "))
     res = any(chr.isdigit() for chr in str(name))
@@ -39,9 +39,22 @@ while True:
         res = any(chr.isdigit() for chr in str(name))
     else:
         break
+# FOREVER LOOP FOR HANDLING Product sale price INPUT VALIDATION (checks if it isn't a real number greater than 0)
+while True:
+    try:
+        price = float(input("Please insert PRODUCT PRICE value: "))
+    except ValueError:
+        print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
+        continue
+    while not code >= 0 or not code <= 9999:
+        print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
+        code = int(input("Please insert PRODUCT CODE value (0-9999): "))
+    else:
+        break
 
 print("\n" + str(code)) 
 print("\n" + str(name))
+print("\n" + str(price))
 
 
 
@@ -55,8 +68,6 @@ print("\n" + str(name))
 
 '''
 
-
-price = input("Please insert")
 
 
 manucost = input("Please insert")
