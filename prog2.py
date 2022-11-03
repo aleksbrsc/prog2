@@ -46,16 +46,28 @@ while True:
     except ValueError:
         print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
         continue
-    while not code >= 0 or not code <= 9999:
-        print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
-        code = int(input("Please insert PRODUCT CODE value (0-9999): "))
+    while not price > 0:
+        print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
+        price = float(input("Please insert PRODUCT PRICE value: "))
+    else:
+        break
+# FOREVER LOOP FOR HANDLING Product manufacturing cost INPUT VALIDATION (checks if it isn't a real number greater than 0)
+while True:
+    try:
+        price = float(input("Please insert PRODUCT PRICE value: "))
+    except ValueError:
+        print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
+        continue
+    while not price > 0:
+        print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
+        price = float(input("Please insert PRODUCT PRICE value: "))
     else:
         break
 
 print("\n" + str(code)) 
 print("\n" + str(name))
 print("\n" + str(price))
-
+print("\n" + str(manucost))
 
 
 
