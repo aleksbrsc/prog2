@@ -11,18 +11,17 @@ class Product:
 # INPUT VALIDATION FOR Product code (checks if it isn't an int from 0-9999)
 while True:
     try:
-        code = int(input("Please insert PRODUCT CODE value (0-9999): "))
-    except ValueError:
-        print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
-        continue
-    while not code >= 0 or not code <= 9999:
-        print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
-        code = int(input("Please insert PRODUCT CODE value (0-9999): "))
-    else:
+        code = int(input("Please insert PRODUCT CODE value (0-9999): ") or -1)
+    except : pass
+    if (code < 10000 and code >= 0):
         break
+    else: print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
 # INPUT VALIDATION FOR Product name (checks if the input contains numbers)
 while True:
     name = str(input("Please insert PRODUCT NAME: "))
+    if len(name) > 2:
+        print("\n\u001b[31mPRODUCT NAME must be a string without any numbers\u001b[0m\n")
+        name = str(input("Please insert PRODUCT NAME: "))
     res = any(chr.isdigit() for chr in str(name))
     while res == True: 
         print("\n\u001b[31mPRODUCT NAME must be a string without any numbers\u001b[0m\n")
@@ -34,10 +33,10 @@ while True:
 while True:
     try:
         price = float(input("Please insert PRODUCT PRICE value: "))
-    except ValueError:
+    except:
         print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
         continue
-    while not price > 0:
+    while price <= 0:
         print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
         price = float(input("Please insert PRODUCT PRICE value: "))
     else:
