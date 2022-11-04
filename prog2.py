@@ -81,7 +81,8 @@ while True:
     else:
         break
 # PRINTS ALL INPUTS FOR USER TO SEE
-print("\nProduct code: " + str(code)) 
+print("\n~ PRODUCT INFORMATION ~\n") 
+print("Product code: " + str(code)) 
 print("Product name: " + str(name))
 print("Product price: $" + str(price))
 print("Product manufacturing cost: $" + str(manucost))
@@ -95,18 +96,22 @@ missedsales=0
 totalsold=0
 netpnl=0
 # FOR LOOP SIMULATING MONTHLY PRODUCTION AND SALES
+print("~ MONTHLY PRODUCTION AND SALES SIMULATION ~\n") 
 for i in range(1,13):
     product.stock += product.monthlymanu
     deviation = random.randint(-10,10)
     monthlysold = product.monthlymanu + deviation
-    # CHECK FOR NEGATIVE STOCK -> deviation DECREASES BY ONE UNTIL IT DOESN'T GO BELOW 0 ANYMORE     
+    # CHECK FOR NEGATIVE STOCK -> deviation DECREASES BY ONE UNTIL IT DOESN'T GO BELOW 0 ANYMORE
+    # adds 1 to missedsales for everytime it loops     
     while (product.stock - monthlysold) < 0:
         deviation -= 1
         monthlysold = product.monthlymanu + deviation
-        # CHECKS FOR NEGATIVE MONTHLY SOLD -> monthlysold INCREASES BY 1 UNTIL IT IS NO LONGER NEGATIVE
-        while monthlysold < 0:
-            monthlysold+=1
         missedsales += 1
+    # CHECKS FOR NEGATIVE MONTHLY SOLD -> monthlysold INCREASES BY 1 UNTIL IT IS NO LONGER NEGATIVE
+    # removes 1 from missedsales everytime it loops
+    while monthlysold < 0:
+        monthlysold += 1
+        missedsales -= 1
     product.stock -= monthlysold
     totalsold += monthlysold
     print("Month " + str(i) + ":")
