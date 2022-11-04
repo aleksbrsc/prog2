@@ -1,68 +1,80 @@
 import random
 import logic
-# INPUT VALIDATION FOR Product code (breaks loop if its an integer from 0-9999)
-code=-1
 while True:
-    try:
-        code = int(input("Please insert PRODUCT CODE value (0-9999): "))
-    except: pass
-    if code >= 0 and code < 10000:
+    # INPUT VALIDATION FOR Product code (breaks loop if its an integer from 0-9999)
+    code=-1
+    while True:
+        try:
+            code = int(input("Please insert PRODUCT CODE value (0-9999): "))
+        except: pass
+        if code >= 0 and code < 10000:
+            break
+        else: print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
+    # INPUT VALIDATION FOR Product name (breaks loop if it contains alphabetical chars and length is at least 3 chars)
+    name=""
+    while True:
+        name = input("Please insert PRODUCT NAME: ")
+        if (name.isalpha()) and len(name) > 2:
+            break
+        else: print("\n\u001b[31mPRODUCT NAME must contain at least three characters and have no numbers\u001b[0m\n")
+    # INPUT VALIDATION FOR Product sale price (breaks loop if its a real number greater than 0)
+    price=-1
+    while True:
+        try:
+            price = float(input("Please insert PRODUCT PRICE value: "))
+        except: pass
+        if price > 0:
+            break
+        else: print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
+    price = "{:.2f}".format(price)
+    # INPUT VALIDATION FOR Product manufacturing cost (breaks loop if its a real number greater than 0)
+    manucost=-1
+    while True:
+        try:
+            manucost = float(input("Please insert PRODUCT MANUFACTURING COST value: "))
+        except: pass
+        if manucost > 0:
+            break
+        else:
+            print("\n\u001b[31mPRODUCT MANUFACTURING COST must be a real number greater than 0\u001b[0m\n")
+    manucost = "{:.2f}".format(manucost)
+    # INPUT VALIDATION FOR Stock Level (breaks loop if its an integer greater than 0)
+    stock=-1
+    while True:
+        try:
+            stock = int(input("Please insert PRODUCT STOCK LEVEL value: "))
+        except: pass
+        if stock > 0:
+            break
+        else: print("\n\u001b[31mPRODUCT STOCK LEVEL must be an integer greater than 0\u001b[0m\n")
+    # INPUT VALIDATION FOR Estimated Monthly Units Manufactured (breaks loop if its an integer greater than or equal to 0)
+    monthlymanu=-1
+    while True:
+        try:
+            monthlymanu = int(input("Please insert ESTIMATED MONTHLY UNITS MANUFACTURED value: "))
+        except: pass
+        if monthlymanu >= 0:
+            break
+        else: print("\n\u001b[31mESTIMATED MONTHLY UNITS MANUFACTURED must be an integer greater than or equal to 0\u001b[0m\n")
+    # PRINTS ALL PRODUCT INFORMATION
+    print("\n~ PRODUCT INFORMATION ~\n") 
+    print("Product code: " + str(code)) 
+    print("Product name: " + str(name))
+    print("Product price: $" + str(price))
+    print("Product manufacturing cost: $" + str(manucost))
+    print("Product stock level: " + str(stock))
+    print("Estimated monthly units manufactured: " + str(monthlymanu))
+    print("\nAre you okay with your product info? (yes/no)")
+    print('If you say "no" then you may edit the product again.\n')
+    sure = input("> ").lower()
+    if sure == "yes":
+        print("\nVery well.")
         break
-    else: print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
-# INPUT VALIDATION FOR Product name (breaks loop if it contains alphabetical chars and length is at least 3 chars)
-name=""
-while True:
-    name = input("Please insert PRODUCT NAME: ")
-    if (name.isalpha()) and len(name) > 2:
-        break
-    else: print("\n\u001b[31mPRODUCT NAME must contain at least three characters and have no numbers\u001b[0m\n")
-# INPUT VALIDATION FOR Product sale price (breaks loop if its a real number greater than 0)
-price=-1
-while True:
-    try:
-        price = float(input("Please insert PRODUCT PRICE value: "))
-    except: pass
-    if price > 0:
-        break
-    else: print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
-price = "{:.2f}".format(price)
-# INPUT VALIDATION FOR Product manufacturing cost (breaks loop if its a real number greater than 0)
-manucost=-1
-while True:
-    try:
-        manucost = float(input("Please insert PRODUCT MANUFACTURING COST value: "))
-    except: pass
-    if manucost > 0:
-        break
+    elif sure == "no":
+        print("\nVery well. You may remake your product.\n")
     else:
-        print("\n\u001b[31mPRODUCT MANUFACTURING COST must be a real number greater than 0\u001b[0m\n")
-manucost = "{:.2f}".format(manucost)
-# INPUT VALIDATION FOR Stock Level (breaks loop if its an integer greater than 0)
-stock=-1
-while True:
-    try:
-        stock = int(input("Please insert PRODUCT STOCK LEVEL value: "))
-    except: pass
-    if stock > 0:
         break
-    else: print("\n\u001b[31mPRODUCT STOCK LEVEL must be an integer greater than 0\u001b[0m\n")
-# INPUT VALIDATION FOR Estimated Monthly Units Manufactured (breaks loop if its an integer greater than or equal to 0)
-monthlymanu=-1
-while True:
-    try:
-        monthlymanu = int(input("Please insert ESTIMATED MONTHLY UNITS MANUFACTURED value: "))
-    except: pass
-    if monthlymanu >= 0:
-        break
-    else: print("\n\u001b[31mESTIMATED MONTHLY UNITS MANUFACTURED must be an integer greater than or equal to 0\u001b[0m\n")
-# PRINTS ALL PRODUCT INFORMATION
-print("\n~ PRODUCT INFORMATION ~\n") 
-print("Product code: " + str(code)) 
-print("Product name: " + str(name))
-print("Product price: $" + str(price))
-print("Product manufacturing cost: $" + str(manucost))
-print("Product stock level: " + str(stock))
-print("Estimated monthly units manufactured: " + str(monthlymanu) + "\n")
+
 # ASSIGNS PRODUCT INFORMATION TO OBJECT NAMED 'product' in class Product in logic
 product = logic.Product(code,name,price,manucost,stock,monthlymanu)
 # INITIALIZING STOCK STATEMENT RELATED VARIABLES
@@ -72,7 +84,7 @@ totalsold=0
 netpnl=0
 missedprofit=0
 # FOR LOOP SIMULATING MONTHLY PRODUCTION AND SALES
-print("~ MONTHLY PRODUCTION AND SALES SIMULATION ~\n")
+print("\n~ MONTHLY PRODUCTION AND SALES SIMULATION ~\n")
 for i in range(1,13):
     product.stock += product.monthlymanu
     deviation = random.randint(-10,10)
