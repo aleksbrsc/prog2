@@ -13,72 +13,51 @@ while True:
     try:
         code = int(input("Please insert PRODUCT CODE value (0-9999): ") or -1)
     except : pass
-    if (code < 10000 and code >= 0):
+    if code >= 0 and code < 10000:
         break
     else: print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
 # INPUT VALIDATION FOR Product name (checks if the input contains numbers)
 while True:
-    name = str(input("Please insert PRODUCT NAME: "))
-    if len(name) > 2:
-        print("\n\u001b[31mPRODUCT NAME must be a string without any numbers\u001b[0m\n")
-        name = str(input("Please insert PRODUCT NAME: "))
-    res = any(chr.isdigit() for chr in str(name))
-    while res == True: 
-        print("\n\u001b[31mPRODUCT NAME must be a string without any numbers\u001b[0m\n")
-        name = str(input("Please insert PRODUCT NAME: "))
-        res = any(chr.isdigit() for chr in str(name))
-    else:
-        break
+    name = input("Please insert PRODUCT NAME: ")
+    if (name.isalpha()) and len(name) > 2:
+        break        
+    else: print("\n\u001b[31mPRODUCT NAME must contain at least three characters and have no numbers\u001b[0m\n")
 # INPUT VALIDATION FOR Product sale price (checks if it isn't a real number greater than 0)
 while True:
     try:
-        price = float(input("Please insert PRODUCT PRICE value: "))
-    except:
-        print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
-        continue
-    while price <= 0:
-        print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
-        price = float(input("Please insert PRODUCT PRICE value: "))
-    else:
+        price = float(input("Please insert PRODUCT PRICE value: ") or -1)
+    except: pass
+    if price > 0:
         break
+    else: print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
+
 price = "{:.2f}".format(price)
 # INPUT VALIDATION FOR Product manufacturing cost (checks if it isn't a real number greater than 0)
 while True:
     try:
-        manucost = float(input("Please insert PRODUCT MANUFACTURING COST value: "))
-    except ValueError:
-        print("\n\u001b[31mPRODUCT MANUFACTURING COST must be a real number greater than 0\u001b[0m\n")
-        continue
-    while not manucost > 0:
-        print("\n\u001b[31mPRODUCT MANUFACTURING COST must be a real number greater than 0\u001b[0m\n")
-        manucost = float(input("Please insert PRODUCT MANUFACTURING COST value: "))
-    else:
+        manucost = float(input("Please insert PRODUCT MANUFACTURING COST value: ") or -1)
+    except: pass
+    if manucost > 0:
         break
+    else:
+        print("\n\u001b[31mPRODUCT MANUFACTURING COST must be a real number greater than 0\u001b[0m\n")
 manucost = "{:.2f}".format(manucost)
 # INPUT VALIDATION FOR Stock Level (checks if it isn't an integer greater than 0)
 while True:
     try:
-        stock = int(input("Please insert PRODUCT STOCK LEVEL value: "))
-    except ValueError:
-        print("\n\u001b[31mPRODUCT STOCK LEVEL must be an integer greater than 0\u001b[0m\n")
-        continue
-    while not stock > 0:
-        print("\n\u001b[31mPRODUCT STOCK LEVEL must be an integer greater than 0\u001b[0m\n")
-        stock = int(input("Please insert PRODUCT STOCK LEVEL value: "))
-    else:
+        stock = int(input("Please insert PRODUCT STOCK LEVEL value: ") or -1)
+    except: pass
+    if stock > 0:
         break
+    else: print("\n\u001b[31mPRODUCT STOCK LEVEL must be an integer greater than 0\u001b[0m\n")
 # INPUT VALIDATION FOR  Estimated Monthly Units Manufactured (checks if it isn't an integer greater than or equal to 0)
 while True:
     try:
-        monthlymanu = int(input("Please insert ESTIMATED MONTHLY UNITS MANUFACTURED value: "))
-    except ValueError:
-        print("\n\u001b[31mESTIMATED MONTHLY UNITS MANUFACTURED must be an integer greater than or equal to 0\u001b[0m\n")
-        continue
-    while not monthlymanu >= 0:
-        print("\n\u001b[31mESTIMATED MONTHLY UNITS MANUFACTURED must be an integer greater than or equal to 0\u001b[0m\n")
-        monthlymanu = int(input("Please insert ESTIMATED MONTHLY UNITS MANUFACTURED value: "))
-    else:
+        monthlymanu = int(input("Please insert ESTIMATED MONTHLY UNITS MANUFACTURED value: ") or -1)
+    except: pass
+    if monthlymanu >= 0:
         break
+    else: print("\n\u001b[31mESTIMATED MONTHLY UNITS MANUFACTURED must be an integer greater than or equal to 0\u001b[0m\n")
 # PRINTS ALL INPUTS FOR USER TO SEE
 print("\n~ PRODUCT INFORMATION ~\n") 
 print("Product code: " + str(code)) 
