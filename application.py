@@ -1,5 +1,6 @@
 import random
 import logic
+#   CHECK TO SEE IF USER IS SURE OF THEIR INPUTS AT THE END (breaks loop if end-user is okay with their product)
 while True:
     # INPUT VALIDATION FOR Product code (breaks loop if its an integer from 0-9999)
     code=-1
@@ -66,7 +67,7 @@ while True:
     print("Estimated monthly units manufactured: " + str(monthlymanu))
     print("\nAre you okay with your product info? (yes/no)")
     print('If you say "no" then you may edit the product again.\n')
-    sure = input("> ").lower()
+    sure = input("\u001b[245m> \u001b[0m").lower()
     if sure == "yes":
         print("\nVery well.")
         break
@@ -74,7 +75,6 @@ while True:
         print("\nVery well. You may remake your product.\n")
     else:
         break
-
 # ASSIGNS PRODUCT INFORMATION TO OBJECT NAMED 'product' in class Product in logic
 product = logic.Product(code,name,price,manucost,stock,monthlymanu)
 # INITIALIZING STOCK STATEMENT RELATED VARIABLES
