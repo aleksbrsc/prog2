@@ -1,5 +1,5 @@
 import random
-
+# CREATION OF CLASS Product
 class Product:
    def __init__(self, code, name, price, manucost,stock,monthlymanu):
     self.code=code
@@ -8,8 +8,7 @@ class Product:
     self.manucost=manucost
     self.stock=stock
     self.monthlymanu=monthlymanu
-
-# FOREVER LOOP FOR HANDLING Product code INPUT VALIDATION (checks if it isn't an int from 0-9999)
+# INPUT VALIDATION FOR Product code (checks if it isn't an int from 0-9999)
 while True:
     try:
         code = int(input("Please insert PRODUCT CODE value (0-9999): "))
@@ -21,7 +20,7 @@ while True:
         code = int(input("Please insert PRODUCT CODE value (0-9999): "))
     else:
         break
-# FOREVER LOOP FOR HANDLING Product name INPUT VALIDATION (checks if the input contains numbers)
+# INPUT VALIDATION FOR Product name (checks if the input contains numbers)
 while True:
     name = str(input("Please insert PRODUCT NAME: "))
     res = any(chr.isdigit() for chr in str(name))
@@ -31,7 +30,7 @@ while True:
         res = any(chr.isdigit() for chr in str(name))
     else:
         break
-# FOREVER LOOP FOR HANDLING Product sale price INPUT VALIDATION (checks if it isn't a real number greater than 0)
+# INPUT VALIDATION FOR Product sale price (checks if it isn't a real number greater than 0)
 while True:
     try:
         price = float(input("Please insert PRODUCT PRICE value: "))
@@ -44,7 +43,7 @@ while True:
     else:
         break
 price = "{:.2f}".format(price)
-# FOREVER LOOP FOR HANDLING Product manufacturing cost INPUT VALIDATION (checks if it isn't a real number greater than 0)
+# INPUT VALIDATION FOR Product manufacturing cost (checks if it isn't a real number greater than 0)
 while True:
     try:
         manucost = float(input("Please insert PRODUCT MANUFACTURING COST value: "))
@@ -57,7 +56,7 @@ while True:
     else:
         break
 manucost = "{:.2f}".format(manucost)
-# FOREVER LOOP FOR HANDLING Stock Level INPUT VALIDATION (checks if it isn't an integer greater than 0)
+# INPUT VALIDATION FOR Stock Level (checks if it isn't an integer greater than 0)
 while True:
     try:
         stock = int(input("Please insert PRODUCT STOCK LEVEL value: "))
@@ -69,7 +68,7 @@ while True:
         stock = int(input("Please insert PRODUCT STOCK LEVEL value: "))
     else:
         break
-# FOREVER LOOP FOR HANDLING Estimated Monthly Units Manufactured INPUT VALIDATION (checks if it isn't an integer greater than or equal to 0)
+# INPUT VALIDATION FOR  Estimated Monthly Units Manufactured (checks if it isn't an integer greater than or equal to 0)
 while True:
     try:
         monthlymanu = int(input("Please insert ESTIMATED MONTHLY UNITS MANUFACTURED value: "))
@@ -90,4 +89,29 @@ print("Product stock level: " + str(stock))
 print("Estimated monthly units manufactured: " + str(monthlymanu) + "\n")
 # OBJECT NAMED 'product' CREATED
 product = Product(code,name,price,manucost,stock,monthlymanu)
-
+# INITIALIZING STOCK STATEMENT RELATED VARIABLES
+monthlysold=0
+totalsold=0
+netpnl=0
+# FOR LOOP SIMULATING MONTHLY PRODUCTION AND SALES
+for i in range(1,13):
+    product.stock += product.monthlymanu
+    deviation = random.randint(-10,10)
+    monthlysold = product.monthlymanu + deviation
+    while (product.stock - monthlysold) < 0:
+        deviation = random.randint(-10,10)
+        monthlysold = product.monthlymanu + deviation
+    product.stock -= monthlysold
+    totalsold += monthlysold
+    print("Month",i,":")
+    print("  Units manufactured:",str(product.monthlymanu),"\n  Units sold:",str(monthlysold),"\n  Stock:",str(product.stock))
+# STORES CACULATIONS FOR NET PNL INSIDE netpnl AND REFORMATS TO TWO DECIMAL POINTS 
+netpnl = (float(totalsold)*float(product.price))-(float(product.monthlymanu) * float(product.manucost))
+netpnl = "{:.2f}".format(netpnl)
+# IF STATEMENT TO PRINT DOLLAR SIGN IN CORRECT LOCATION
+# prevents dollar sign before negative sign (e.g. $-100)
+if float(netpnl) >= 0:
+    print("\nYour Net PNL: " + "\u001b[32m$" + str(netpnl) + "\u001b[0m")
+else:
+    str(netpnl)
+    print("\nYour Net PNL: \u001b[31m" + netpnl.replace("-","-$") + "\u001b[0m")
