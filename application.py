@@ -1,13 +1,5 @@
 import random
-# CREATION OF CLASS Product
-class Product:
-   def __init__(self, code, name, price, manucost,stock,monthlymanu):
-    self.code=code
-    self.name=name
-    self.price=price
-    self.manucost=manucost
-    self.stock=stock
-    self.monthlymanu=monthlymanu
+import logic
 # INPUT VALIDATION FOR Product code (checks if it isn't an int from 0-9999)
 while True:
     try:
@@ -66,7 +58,7 @@ print("Product manufacturing cost: $" + str(manucost))
 print("Product stock level: " + str(stock))
 print("Estimated monthly units manufactured: " + str(monthlymanu) + "\n")
 # OBJECT NAMED 'product' CREATED
-product = Product(code,name,price,manucost,stock,monthlymanu)
+product = logic.Product(code,name,price,manucost,stock,monthlymanu)
 # INITIALIZING STOCK STATEMENT RELATED VARIABLES
 monthlysold=0
 missedsales=0
