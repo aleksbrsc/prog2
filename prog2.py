@@ -91,6 +91,7 @@ print("Estimated monthly units manufactured: " + str(monthlymanu) + "\n")
 product = Product(code,name,price,manucost,stock,monthlymanu)
 # INITIALIZING STOCK STATEMENT RELATED VARIABLES
 monthlysold=0
+missedsales=0
 totalsold=0
 netpnl=0
 # FOR LOOP SIMULATING MONTHLY PRODUCTION AND SALES
@@ -98,12 +99,17 @@ for i in range(1,13):
     product.stock += product.monthlymanu
     deviation = random.randint(-10,10)
     monthlysold = product.monthlymanu + deviation
+    # CHECK FOR NEGATIVE STOCK -> deviation DECREASES BY ONE UNTIL IT DOESN'T GO BELOW 0 ANYMORE     
     while (product.stock - monthlysold) < 0:
-        deviation = random.randint(-10,10)
+        deviation -= 1
         monthlysold = product.monthlymanu + deviation
+        # CHECKS FOR NEGATIVE MONTHLY SOLD -> monthlysold INCREASES BY 1 UNTIL IT IS NO LONGER NEGATIVE
+        while monthlysold < 0:
+            monthlysold+=1
+        missedsales += 1
     product.stock -= monthlysold
     totalsold += monthlysold
-    print("Month",i,":")
+    print("Month " + str(i) + ":")
     print("  Units manufactured:",str(product.monthlymanu),"\n  Units sold:",str(monthlysold),"\n  Stock:",str(product.stock))
 # STORES CACULATIONS FOR NET PNL INSIDE netpnl AND REFORMATS TO TWO DECIMAL POINTS 
 netpnl = (float(totalsold)*float(product.price))-(float(product.monthlymanu) * float(product.manucost))
@@ -115,3 +121,6 @@ if float(netpnl) >= 0:
 else:
     str(netpnl)
     print("\nYour Net PNL: \u001b[31m" + netpnl.replace("-","-$") + "\u001b[0m")
+#prints details of sales that could not be fulfilled
+if missedsales > 0:
+    print("\nYou missed a total of",str(missedsales),"sales this year that could not be fulfilled due lack of supply!\n")
