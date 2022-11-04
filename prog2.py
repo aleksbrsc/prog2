@@ -30,7 +30,6 @@ while True:
     if price > 0:
         break
     else: print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
-
 price = "{:.2f}".format(price)
 # INPUT VALIDATION FOR Product manufacturing cost (checks if it isn't a real number greater than 0)
 while True:
@@ -74,7 +73,7 @@ missedsales=0
 totalsold=0
 netpnl=0
 # FOR LOOP SIMULATING MONTHLY PRODUCTION AND SALES
-print("~ MONTHLY PRODUCTION AND SALES SIMULATION ~\n") 
+print("~ MONTHLY PRODUCTION AND SALES SIMULATION ~\n")
 for i in range(1,13):
     product.stock += product.monthlymanu
     deviation = random.randint(-10,10)
