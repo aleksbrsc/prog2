@@ -2,11 +2,6 @@ import random
 import logic
 # INPUT VALIDATION FOR Product code (checks if it isn't an int from 0-9999)
 code=-1
-name=""
-price=-1
-manucost=-1
-stock=-1
-monthlymanu=-1
 while True:
     try:
         code = int(input("Please insert PRODUCT CODE value (0-9999): ") or -1)
@@ -15,12 +10,14 @@ while True:
         break
     else: print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
 # INPUT VALIDATION FOR Product name (checks if the input contains numbers)
+name=""
 while True:
     name = input("Please insert PRODUCT NAME: ")
     if (name.isalpha()) and len(name) > 2:
         break        
     else: print("\n\u001b[31mPRODUCT NAME must contain at least three characters and have no numbers\u001b[0m\n")
 # INPUT VALIDATION FOR Product sale price (checks if it isn't a real number greater than 0)
+price=-1
 while True:
     try:
         price = float(input("Please insert PRODUCT PRICE value: ") or -1)
@@ -30,6 +27,7 @@ while True:
     else: print("\n\u001b[31mPRODUCT PRICE must be a real number greater than 0\u001b[0m\n")
 price = "{:.2f}".format(price)
 # INPUT VALIDATION FOR Product manufacturing cost (checks if it isn't a real number greater than 0)
+manucost=-1
 while True:
     try:
         manucost = float(input("Please insert PRODUCT MANUFACTURING COST value: ") or -1)
@@ -40,6 +38,7 @@ while True:
         print("\n\u001b[31mPRODUCT MANUFACTURING COST must be a real number greater than 0\u001b[0m\n")
 manucost = "{:.2f}".format(manucost)
 # INPUT VALIDATION FOR Stock Level (checks if it isn't an integer greater than 0)
+stock=-1
 while True:
     try:
         stock = int(input("Please insert PRODUCT STOCK LEVEL value: ") or -1)
@@ -48,6 +47,7 @@ while True:
         break
     else: print("\n\u001b[31mPRODUCT STOCK LEVEL must be an integer greater than 0\u001b[0m\n")
 # INPUT VALIDATION FOR  Estimated Monthly Units Manufactured (checks if it isn't an integer greater than or equal to 0)
+monthlymanu=-1
 while True:
     try:
         monthlymanu = int(input("Please insert ESTIMATED MONTHLY UNITS MANUFACTURED value: ") or -1)
@@ -70,6 +70,7 @@ monthlysold=0
 missedsales=0
 totalsold=0
 netpnl=0
+missedprofit=0
 # FOR LOOP SIMULATING MONTHLY PRODUCTION AND SALES
 print("~ MONTHLY PRODUCTION AND SALES SIMULATION ~\n")
 for i in range(1,13):
@@ -100,6 +101,9 @@ if float(netpnl) >= 0:
 else:
     str(netpnl)
     print("\nYour Net PNL: \u001b[31m" + netpnl.replace("-","-$") + "\u001b[0m")
-#prints details of sales that could not be fulfilled
+#prints details of sales that could not be fulfilled, calculates missedprofit
+missedprofit = float(missedsales)*float(product.price)
+missedprofit = "{:.2f}".format(missedprofit)
 if missedsales > 0:
-    print("\nYou missed a total of",str(missedsales),"sales this year that could not be fulfilled due lack of supply!\n")
+    print("\nYou missed a total of",str(missedsales),"sales this year that could not be fulfilled due lack of supply!")
+    print("These missed sales would have increased your profit by \u001b[32m$" + str(missedprofit) + "\u001b[0m\n")
