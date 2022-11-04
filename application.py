@@ -1,10 +1,16 @@
 import random
 import logic
 # INPUT VALIDATION FOR Product code (checks if it isn't an int from 0-9999)
+code=-1
+name=""
+price=-1
+manucost=-1
+stock=-1
+monthlymanu=-1
 while True:
     try:
         code = int(input("Please insert PRODUCT CODE value (0-9999): ") or -1)
-    except : pass
+    except: pass
     if code >= 0 and code < 10000:
         break
     else: print("\n\u001b[31mPRODUCT CODE must be an integer from 0-9999\u001b[0m\n")
@@ -70,11 +76,10 @@ for i in range(1,13):
     product.stock += product.monthlymanu
     deviation = random.randint(-10,10)
     monthlysold = product.monthlymanu + deviation
-    # CHECK FOR NEGATIVE STOCK -> deviation DECREASES BY ONE UNTIL IT DOESN'T GO BELOW 0 ANYMORE
+    # CHECK FOR NEGATIVE STOCK -> monthlysold DECREASES BY ONE UNTIL IT DOESN'T GO BELOW 0 ANYMORE
     # adds 1 to missedsales for everytime it loops     
     while (product.stock - monthlysold) < 0:
-        deviation -= 1
-        monthlysold = product.monthlymanu + deviation
+        monthlysold -= 1
         missedsales += 1
     # CHECKS FOR NEGATIVE MONTHLY SOLD -> monthlysold INCREASES BY 1 UNTIL IT IS NO LONGER NEGATIVE
     # removes 1 from missedsales everytime it loops
