@@ -67,7 +67,7 @@ while True:
     print("Estimated monthly units manufactured: " + str(monthlymanu))
     print("\nAre you okay with your product info? (yes/no)")
     print('If you say "no" then you may edit the product again.\n')
-    sure = input("\u001b[245m> \u001b[0m").lower()
+    sure = input("\u001b[90m> \u001b[0m").lower()
     if sure == "yes":
         print("\nVery well.")
         break
